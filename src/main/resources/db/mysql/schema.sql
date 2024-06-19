@@ -1,17 +1,32 @@
--- 직원정보 
--- 이건 view로 처리하는게 맞다
+-- 사원정보 (개인정보)
 CREATE TABLE employees (
     id INTEGER AUTO_INCREMENT, -- 일련번호 기본키
     code INTEGER UNSIGNED UNIQUE, -- 사원코드 
     name VARCHAR(20) NOT NULL, -- 이름
     email VARCHAR(50) NOT NULL, -- 이메일 
     phone VARCHAR(20) NOT NULL , -- 연락처
+    address VARCHAR(100) NOT NULL ,
     birth_date DATE NOT NULL, -- 생년월일
     photo VARCHAR(255), -- 증명사진
-    status VARCHAR(20) NOT NULL, -- 재직상태
-    hire_date VARCHAR(20) NOT NULL, -- 입사일자 
     UNIQUE (code),
     PRIMARY KEY (id)
+) ENGINE=InnoDB;
+
+-- 사원정보 (사내정보)
+CREATE TABLE employee_status (
+    id INTEGER AUTO_INCREMENT, -- 일련번호 기본키
+    employee_id INTEGER UNSIGNED NOT NULL, -- 사번 / employees 테이블 참조 외래키
+    department_id INTEGER UNSIGNED NOT NULL, -- 부서코드 / departments 테이블 참조 외래키
+    position_id INTEGER UNSIGNED NOT NULL, -- 직급코드 / positions 테이블 참조 외래키
+    job_type_id INTEGER UNSIGNED NOT NULL, -- 고용형태코드 / job_types 테이블 참조 외래키
+    status VARCHAR(20) NOT NULL, -- 재직상태 (예: 재직, 퇴사 등)
+    start_date DATE NOT NULL, -- 상태 시작일
+    end_date DATE, -- 상태 종료일 (현재 재직 중인 경우 NULL)
+    PRIMARY KEY (id),
+    FOREIGN KEY (employee_id) REFERENCES employees(id),
+    FOREIGN KEY (department_id) REFERENCES departments(id),
+    FOREIGN KEY (position_id) REFERENCES positions(id),
+    FOREIGN KEY (job_type_id) REFERENCES job_types(id)
 ) ENGINE=InnoDB;
 
 -- 계정정보
@@ -54,7 +69,7 @@ CREATE TABLE job_types (
     PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
--- 이력 
+-- 인사이동 기록 (부서이동, 승진, 고용형태 변경)
 CREATE TABLE job_history (
 	id INTEGER AUTO_INCREMENT, -- 일련번호 기본키
 	employees_id INTEGER UNSIGNED, -- 사번 / employee 참조 외래키
