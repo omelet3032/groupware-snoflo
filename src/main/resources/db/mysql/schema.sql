@@ -3,14 +3,15 @@ USE snoflo;
 -- 사원정보 (개인정보)
 CREATE TABLE employees (
     id INTEGER UNSIGNED AUTO_INCREMENT, -- 일련번호 기본키
-    code INTEGER UNSIGNED UNIQUE, -- 사원코드 
+    code INTEGER UNSIGNED, -- 사원코드 
     name VARCHAR(20) NOT NULL, -- 이름
     email VARCHAR(50) NOT NULL, -- 이메일 
     phone VARCHAR(20) NOT NULL , -- 연락처
-    address VARCHAR(100) NOT NULL ,
+    address VARCHAR(100) NOT NULL , -- 주소
     birth_date DATE NOT NULL, -- 생년월일
     photo VARCHAR(255), -- 증명사진
-    UNIQUE (code, email),
+    UNIQUE (code), -- 사원코드는 유일해야 한다
+    UNIQUE (email), -- 이메일도 유일해야 한다
     PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
@@ -118,7 +119,7 @@ CREATE TABLE remaining_vacation_days (
     employee_id INTEGER UNSIGNED NOT NULL,
     type_id INTEGER UNSIGNED NOT NULL,
     year YEAR NOT NULL, -- 연도
-    remaining_days INTEGER NOT NULL,
+    remaining_days INTEGER NOT NULL DEFAULT 0,
     UNIQUE(employee_id, type_id, year),
     FOREIGN KEY (employee_id) REFERENCES employees(id),
     FOREIGN KEY (type_id) REFERENCES vacation_types(id)
