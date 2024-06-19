@@ -1,72 +1,97 @@
--- 부서정보
-INSERT INTO departments (department_code, department_name, manager_id)
-VALUES (101, 'CEO실', 1);
-INSERT INTO departments (department_code, department_name, manager_id)
-VALUES (102, '경영지원팀', 2);
-INSERT INTO departments (department_code, department_name, manager_id)
-VALUES (103, '개발실', 3);
-INSERT INTO departments (department_code, department_name, manager_id)
-VALUES (104, 'devops', 3);
+USE snoflo;
 
--- 직급정보
-INSERT INTO job_positions (position_code, position_name)
-VALUES (201, 'CEO');
-INSERT INTO job_positions (position_code, position_name)
-VALUES (202, '실장');
-INSERT INTO job_positions (position_code, position_name)
-VALUES (203, '팀장');
-INSERT INTO job_positions (position_code, position_name)
-VALUES (204, '매니저');
+INSERT INTO employees (code, name, email, phone, address, birth_date)
+VALUES
+(1001, '김경민', 'omelet1@gmail.com', '010-1111-1111', '서울특별시 강남구', '1985-06-15'),
+(1002, '박영훈', 'omelet2@gmail.com', '010-2222-2222', '경기도 부천시', '1990-07-25'),
+(1003, '이민영', 'omelet3@gmail.com', '010-3333-3333', '경기도 성남시', '1993-03-12');
 
--- 고용형태 정보
-INSERT INTO employment_types (employment_type_code, employment_type_name)
-VALUES (10, '정규직');
-INSERT INTO employment_types (employment_type_code, employment_type_name)
-VALUES (20, '계약직');
-INSERT INTO employment_types (employment_type_code, employment_type_name)
-VALUES (30, '인턴');
-
--- 계정정보
 INSERT INTO accounts (employee_id, email, password, role)
-VALUES (1, 'jinwooyu@gmail.com', '1234', '최고관리자');
-INSERT INTO accounts (employee_id, email, password, role)
-VALUES (2, 'hong@gmail.com', '1234', '승인권자');
-INSERT INTO accounts (employee_id, email, password, role)
-VALUES (3, 'chul@gmail.com', '1234', '승인권자');
-INSERT INTO accounts (employee_id, email, password, role)
-VALUES (4, 'young@gmail.com', '1234', '직원');
+VALUES
+(1, 'omelet1@gmail.com', '1234', '관리자'),
+(2, 'omelet2@gmail.com', '1235', '일반'),
+(3, 'omelet3@gmail.com', '1236', '승인권자');
 
--- 휴가 정보
-INSERT INTO vacation_types (vacation_code, vacation_name) 
-VALUES (301, '연차');
-INSERT INTO vacation_types (vacation_code, vacation_name) 
-VALUES (302, '경조사휴가');
+INSERT INTO departments (code, name, manager_id)
+VALUES
+(101, 'HR', 1),
+(102, '개발팀', 2),
+(103, '재무팀', 3);
 
--- 휴직 정보
-INSERT INTO leave_of_absence_types (leave_of_absence_code, leave_of_absence_name)
-VALUES (401, '육아휴직');
-INSERT INTO leave_of_absence_types (leave_of_absence_code, leave_of_absence_name)
-VALUES (402, '질병휴직');
+INSERT INTO positions (code, name)
+VALUES
+(201, 'CEO'),
+(202, '팀장'),
+(203, '매니저');
 
---사원정보
-INSERT INTO employees (employee_id, employee_name, email, phone, birth_date, status, hire_date, position_code, department_code, manager_id, employment_type_code) 
-VALUES (1, '유진우', 'jinwooyu@gmail.com', '010-1111-2222', '1990-08-14', '재직', '2024-01-01', 201, 101, 1, 10);
-INSERT INTO employees (employee_id, employee_name, email, phone, birth_date, status, hire_date, position_code, department_code, manager_id, employment_type_code) 
-VALUES (2, '홍길동', 'hong@gmail.com', '010-1111-3333', '1993-02-11', '재직', '2024-01-01', 202, 103, 2, 10);
-INSERT INTO employees (employee_id, employee_name, email, phone, birth_date, status, hire_date, position_code, department_code, manager_id, employment_type_code) 
-VALUES (3, '김철수', 'chul@gmail.com', '010-1111-4433', '1995-02-11', '재직', '2024-01-10', 203, 102, 3, 10);
-INSERT INTO employees (employee_id, employee_name, email, phone, birth_date, status, hire_date, position_code, department_code, manager_id, employment_type_code) 
-VALUES (4, '김영희', 'young@gmail.com', '010-1122-3333', '1996-02-11', '퇴사', '2024-01-20', 204, 104, 3, 10);
+INSERT INTO job_types (code, name)
+VALUES
+(301, '정규직'),
+(302, '계약직'),
+(303, '인턴');
 
--- 직무 이력 정보
-INSERT INTO job_history (employee_id, start_date, end_date, position_code, department_code, employment_type_code, summary)
-VALUES (4, '2024-01-20', '2024-01-30', 204, 104, 10, '퇴사');
+INSERT INTO attendance_record (employee_id, clock_in, clock_out, work_hours)
+VALUES
+(1, '2024-06-01 08:00:00', null, null),
+(2, null, '2024-03-01 18:00:00', null),
+(3, '2024-06-01 08:30:00', '2024-03-01 17:30:00', '09:00:00');
 
--- 출퇴근기록
-INSERT INTO attendance_record (employee_id, go_to_work_datetime, get_off_work_datetime, work_time)
-VALUES (1, '2023-01-01 09:00:00', '2023-01-01 18:00:00', timediff('2023-01-01 18:00:00', '2023-01-01 09:00:00'));
-commit;
+INSERT INTO vacation_types (code, name)
+VALUES
+(401, '연차'),
+(402, '생일반차'),
+(403, '무급휴가');
+
+INSERT INTO leave_of_absence_types (code, name)
+VALUES
+(501, '육아휴직'),
+(502, '질병휴직'),
+(503, '기타휴직');
+
+--
+INSERT INTO employee_status (employee_id, department_id, position_id, job_type_id, status, start_date, end_date)
+VALUES
+(1, 1, 1, 1, '재직', '2010-01-15', NULL),
+(2, 2, 2, 1, '재직', '2012-07-01', NULL),
+(3, 3, 3, 3, '퇴사', '2015-03-20', '2020-08-30');
+
+--
+INSERT INTO job_history (employee_id, start_date, end_date, position_id, department_id, job_type_id, summary)
+VALUES
+(1, '2012-01-15', NULL, 3, 1, 1, '인턴->정규직'),
+(2, '2012-07-01', NULL, 2, 2, 1, '승진'),
+(3, '2015-03-20', '2020-08-30', 3, 3, 3, '퇴사');
+
+-- 데이터 중복 입력됨
+INSERT INTO remaining_vacation_days (employee_id, type_id, year, remaining_days)
+VALUES
+(1, 1, 2023, 15), 
+(1, 2, 2023, 10),
+(1, 1, 2022, 3),
+(2, 2, 2022, 10),  
+(3, 3, 2023, 5); 
+
+--
+INSERT INTO vacation_grant_history (employee_id, type_id, date, days, summary)
+VALUES
+(1, 1, '2023-01-01', 10, '연차휴가 지급'), 
+(2, 2, '2023-01-15', 1, '생일휴가 지급');
+
+--
+INSERT INTO vacation_usage_history (employee_id, type_id, start_date, end_date, usage_days, summary)
+VALUES
+(1, 1, '2023-03-10', '2023-03-14', 5, '연차휴가 사용'),  
+(2, 2, '2023-04-01', '2023-04-03', 1, '생일휴가 사용');
+--
+INSERT INTO leave_of_absence_grant_history (employee_id, type_id, date, days, summary)
+VALUES
+(1, 1, '2023-04-01', 30, '육아휴직 지급');
+
+--
+INSERT INTO leave_of_absence_usage_history (employee_id, type_id, start_date, end_date, usage_days, summary)
+VALUES
+(1, 1, '2023-04-01', '2023-06-30', 30, '육아휴직 사용');
 
 
 
-COMMIT;
+
