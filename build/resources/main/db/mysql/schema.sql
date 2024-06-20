@@ -18,7 +18,7 @@ CREATE TABLE employees (
 -- 계정정보
 CREATE TABLE accounts (
 	id INTEGER UNSIGNED AUTO_INCREMENT,
-	employee_id INTEGER UNSIGNED, -- 사번없는 관리자 계정 별도로 만들 수 있다.
+	employee_id INTEGER UNSIGNED, -- employee 외래키
     email VARCHAR(50) NOT NULL, -- 이메일 (아이디)
     password VARCHAR(50) NOT NULL, -- 비밀번호
     role VARCHAR(20) NOT NULL, -- 역할 (관리자, 승인권자, 일반)
@@ -66,7 +66,7 @@ CREATE TABLE employee_status (
     status VARCHAR(20) NOT NULL, -- 재직상태 (예: 재직, 퇴사 등)
     hire_date DATE NOT NULL, -- 상태 시작일
     end_date DATE, -- 상태 종료일 (현재 재직 중인 경우 NULL)
-    UNIQUE(employee_id, hire_date),
+    UNIQUE(employee_id, start_date),
     PRIMARY KEY (id),
     FOREIGN KEY (employee_id) REFERENCES employees(id),
     FOREIGN KEY (department_id) REFERENCES departments(id),

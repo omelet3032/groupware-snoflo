@@ -1,5 +1,3 @@
-USE snoflo;
-
 ALTER TABLE accounts DROP FOREIGN KEY accounts_ibfk_1;
 ALTER TABLE departments DROP FOREIGN KEY departments_ibfk_1;
 ALTER TABLE employee_status DROP FOREIGN KEY employee_status_ibfk_1;
