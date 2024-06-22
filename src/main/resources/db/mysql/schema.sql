@@ -4,12 +4,10 @@ USE snoflo;
 CREATE TABLE employees (
     id INTEGER UNSIGNED AUTO_INCREMENT, -- 일련번호 기본키
     name VARCHAR(20) NOT NULL, -- 이름
-    email VARCHAR(50) NOT NULL, -- 이메일 
     phone VARCHAR(20) NOT NULL, -- 연락처
     address VARCHAR(100) NOT NULL , -- 주소
     birth_date DATE NOT NULL, -- 생년월일
     photo VARCHAR(255), -- 증명사진
-    UNIQUE (email), -- 이메일도 유일해야 한다
     PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 

@@ -1,10 +1,10 @@
 USE snoflo;
 
-INSERT INTO employees (code, name, email, phone, address, birth_date)
+INSERT INTO employees (name,phone, address, birth_date)
 VALUES
-(1001, '김경민', 'omelet1@gmail.com', '010-1111-1111', '서울특별시 강남구', '1985-06-15'),
-(1002, '박영훈', 'omelet2@gmail.com', '010-2222-2222', '경기도 부천시', '1990-07-25'),
-(1003, '이민영', 'omelet3@gmail.com', '010-3333-3333', '경기도 성남시', '1993-03-12');
+('김경민', '010-1111-1111', '서울특별시 강남구', '1985-06-15'),
+('박영훈', '010-2222-2222', '경기도 부천시', '1990-07-25'),
+('이민영', '010-3333-3333', '경기도 성남시', '1993-03-12');
 
 INSERT INTO accounts (employee_id, email, password, role)
 VALUES
@@ -49,11 +49,11 @@ VALUES
 (503, '기타휴직');
 
 --
-INSERT INTO employee_status (employee_id, department_id, position_id, job_type_id, status, hire_date, end_date)
+INSERT INTO employee_status (code, employee_id, department_id, position_id, job_type_id, status, hire_date, end_date)
 VALUES
-(1, 1, 1, 1, '재직', '2010-01-15', NULL),
-(2, 2, 2, 1, '재직', '2012-07-01', NULL),
-(3, 3, 3, 3, '퇴사', '2015-03-20', '2020-08-30');
+(1001, 1, 1, 1, 1, '재직', '2010-01-15', NULL),
+(1002, 2, 2, 2, 1, '재직', '2012-07-01', NULL),
+(1003, 3, 3, 3, 3, '퇴사', '2015-03-20', '2020-08-30');
 
 --
 INSERT INTO job_history (employee_id, start_date, end_date, position_id, department_id, job_type_id, summary)
