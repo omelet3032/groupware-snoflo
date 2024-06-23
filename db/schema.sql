@@ -14,7 +14,7 @@ CREATE TABLE employees (
 -- 계정정보
 CREATE TABLE accounts (
 	id INTEGER UNSIGNED AUTO_INCREMENT,
-	employee_id INTEGER UNSIGNED, -- 사번없는 관리자 계정 별도로 만들 수 있다.
+	employee_id INTEGER UNSIGNED NOT NULL, -- 사번없는 관리자 계정 별도로 만들 수 있다.(x) -> 최고관리자 계정은 ceo / 승인권자는 팀장, 경영지원팀
     email VARCHAR(50) NOT NULL, -- 이메일 (아이디)
     password VARCHAR(50) NOT NULL, -- 비밀번호
     role VARCHAR(20) NOT NULL, -- 역할 (관리자, 승인권자, 일반)
