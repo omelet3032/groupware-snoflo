@@ -3,22 +3,18 @@ USE snoflo;
 -- 사원정보 (개인정보)
 CREATE TABLE employees (
     id INTEGER UNSIGNED AUTO_INCREMENT, -- 일련번호 기본키
-    code INTEGER UNSIGNED, -- 사원코드 
     name VARCHAR(20) NOT NULL, -- 이름
-    email VARCHAR(50) NOT NULL, -- 이메일 
     phone VARCHAR(20) NOT NULL, -- 연락처
     address VARCHAR(100) NOT NULL , -- 주소
     birth_date DATE NOT NULL, -- 생년월일
     photo VARCHAR(255), -- 증명사진
-    UNIQUE (code), -- 사원코드는 유일해야 한다
-    UNIQUE (email), -- 이메일도 유일해야 한다
     PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
 -- 계정정보
 CREATE TABLE accounts (
 	id INTEGER UNSIGNED AUTO_INCREMENT,
-	employee_id INTEGER UNSIGNED, -- employee 외래키
+	employee_id INTEGER UNSIGNED, -- 사번없는 관리자 계정 별도로 만들 수 있다.
     email VARCHAR(50) NOT NULL, -- 이메일 (아이디)
     password VARCHAR(50) NOT NULL, -- 비밀번호
     role VARCHAR(20) NOT NULL, -- 역할 (관리자, 승인권자, 일반)
@@ -58,7 +54,8 @@ CREATE TABLE job_types (
 
 -- 사원정보 (사내정보)
 CREATE TABLE employee_status (
-    id INTEGER UNSIGNED AUTO_INCREMENT,
+    id INTEGER UNSIGNED AUTO_INCREMENT,        
+    code INTEGER UNSIGNED, -- 사원코드 
     employee_id INTEGER UNSIGNED NOT NULL, -- 사번 / employees 테이블 참조 외래키
     department_id INTEGER UNSIGNED NOT NULL, -- 부서코드 / departments 테이블 참조 외래키
     position_id INTEGER UNSIGNED NOT NULL, -- 직급코드 / positions 테이블 참조 외래키
@@ -66,7 +63,7 @@ CREATE TABLE employee_status (
     status VARCHAR(20) NOT NULL, -- 재직상태 (예: 재직, 퇴사 등)
     hire_date DATE NOT NULL, -- 상태 시작일
     end_date DATE, -- 상태 종료일 (현재 재직 중인 경우 NULL)
-    UNIQUE(employee_id, start_date),
+    UNIQUE(code),
     PRIMARY KEY (id),
     FOREIGN KEY (employee_id) REFERENCES employees(id),
     FOREIGN KEY (department_id) REFERENCES departments(id),
