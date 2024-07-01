@@ -13,19 +13,19 @@ CREATE TABLE employees (
 
 -- 계정정보
 CREATE TABLE accounts (
-	id INTEGER UNSIGNED AUTO_INCREMENT,
-	employee_id INTEGER UNSIGNED NOT NULL, -- 사번없는 관리자 계정 별도로 만들 수 있다.(x) -> 최고관리자 계정은 ceo / 승인권자는 팀장, 경영지원팀
+		 id INTEGER UNSIGNED AUTO_INCREMENT,
+		 employee_id INTEGER UNSIGNED NOT NULL, -- 최고관리자 계정은 ceo / 승인권자는 팀장, 경영지원팀
     email VARCHAR(50) NOT NULL, -- 이메일 (아이디)
     password VARCHAR(50) NOT NULL, -- 비밀번호
-    role VARCHAR(20) NOT NULL, -- 역할 (관리자, 승인권자, 일반)
+    role VARCHAR(20) NOT NULL, -- 역할 (관리자	, 승인권자, 일반)
     UNIQUE (email),
-    PRIMARY KEY (id),
+    PRIMARY KEY (id),	
     FOREIGN KEY (employee_id) REFERENCES employees(id)
 ) ENGINE=InnoDB;
 
 -- 부서정보
 CREATE TABLE departments ( 
-	id INTEGER UNSIGNED AUTO_INCREMENT,
+		 id INTEGER UNSIGNED AUTO_INCREMENT,
     code INTEGER UNSIGNED NOT NULL, -- 부서코드
     name VARCHAR(20) NOT NULL, -- 부서이름
     manager_id INTEGER UNSIGNED,-- 관리자 이름 
@@ -55,7 +55,7 @@ CREATE TABLE job_types (
 -- 사원정보 (사내정보)
 CREATE TABLE employee_status (
     id INTEGER UNSIGNED AUTO_INCREMENT,        
-    code INTEGER UNSIGNED, -- 사원코드 
+    code INTEGER UNSIGNED NOT NULL, -- 사원코드 
     employee_id INTEGER UNSIGNED NOT NULL, -- 사번 / employees 테이블 참조 외래키
     department_id INTEGER UNSIGNED NOT NULL, -- 부서코드 / departments 테이블 참조 외래키
     position_id INTEGER UNSIGNED NOT NULL, -- 직급코드 / positions 테이블 참조 외래키
@@ -73,8 +73,8 @@ CREATE TABLE employee_status (
 
 -- 인사이동 기록 (부서이동, 승진, 고용형태 변경)
 CREATE TABLE job_history (
-	id INTEGER UNSIGNED AUTO_INCREMENT,
-	employee_id INTEGER UNSIGNED, -- 사번 / employee 참조 외래키
+		 id INTEGER UNSIGNED AUTO_INCREMENT,
+		 employee_id INTEGER UNSIGNED, -- 사번 / employee 참조 외래키
     start_date DATE NOT NULL, -- 시작일자 (입사, 승진, 부서이동 등)
     end_date DATE, -- 마감일자? (퇴사, 이전 부서 근무기간 등)
     position_id INTEGER UNSIGNED NOT NULL, -- 직급코드 / positions 참조 외래키
