@@ -1,7 +1,7 @@
 USE snoflo;
 
 -- 사원정보 (개인정보)
-CREATE TABLE employees (
+CREATE TABLE employees_personal_infomation (
     id INTEGER UNSIGNED AUTO_INCREMENT, -- 일련번호 기본키
     name VARCHAR(20) NOT NULL, -- 이름
     phone VARCHAR(20) NOT NULL, -- 연락처
@@ -53,7 +53,7 @@ CREATE TABLE job_types (
 ) ENGINE=InnoDB;
 
 -- 사원정보 (사내정보)
-CREATE TABLE employee_status (
+CREATE TABLE employee_company_information (
     id INTEGER UNSIGNED AUTO_INCREMENT,        
     code INTEGER UNSIGNED NOT NULL, -- 사원코드 
     employee_id INTEGER UNSIGNED NOT NULL, -- 사번 / employees 테이블 참조 외래키
