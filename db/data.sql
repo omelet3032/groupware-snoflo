@@ -1,23 +1,6 @@
 USE snoflo;
 
-INSERT INTO employees (name,phone, address, birth_date)
-VALUES
-('김경민', '010-1111-1111', '서울특별시 강남구', '1985-06-15'),
-('박영훈', '010-2222-2222', '경기도 부천시', '1990-07-25'),
-('이민영', '010-3333-3333', '경기도 성남시', '1993-03-12');
-
-INSERT INTO accounts (employee_id, email, password, role)
-VALUES
-(1, 'omelet1@gmail.com', '1234', '관리자'),
-(2, 'omelet2@gmail.com', '1235', '일반'),
-(3, 'omelet3@gmail.com', '1236', '승인권자');
-
-INSERT INTO departments (code, name, manager_id)
-VALUES
-(101, 'HR', 1),
-(102, '개발팀', 2),
-(103, '재무팀', 3);
-
+-- 
 INSERT INTO positions (code, name)
 VALUES
 (201, 'CEO'),
@@ -29,6 +12,33 @@ VALUES
 (301, '정규직'),
 (302, '계약직'),
 (303, '인턴');
+
+-- 
+INSERT INTO departments (code, name, manager_id)
+VALUES
+(101, 'HR', NULL),
+(102, '개발팀', NULL),
+(103, '재무팀', NULL);
+
+-- 
+INSERT INTO employees (code, name, phone, birth_date, department_id, position_id, job_type_id, status, hire_date, end_date)
+VALUES
+(1001, '김경민', '010-1111-1111', '1985-06-15', 1, 1, 1, '재직', '2010-01-15', NULL),
+(1002, '박영훈', '010-2222-2222', '1990-07-25', 2, 2, 1, '재직', '2012-07-01', NULL),
+(1003, '이민영', '010-3333-3333', '1993-03-12', 3, 3, 1, '퇴사', '2015-03-20', '2020-08-30');
+
+-- 
+INSERT INTO accounts (employee_id, email, password, role)
+VALUES
+(1, 'omelet1@gmail.com', '1234', '관리자'),
+(2, 'omelet2@gmail.com', '1235', '일반'),
+(3, 'omelet3@gmail.com', '1236', '승인권자');
+
+-- 
+UPDATE departments SET manager_id = 1 WHERE code = 101;
+UPDATE departments SET manager_id = 2 WHERE code = 102;
+UPDATE departments SET manager_id = 3 WHERE code = 103;
+
 
 INSERT INTO attendance_record (employee_id, clock_in, clock_out, work_hours)
 VALUES
@@ -48,12 +58,7 @@ VALUES
 (502, '질병휴직'),
 (503, '기타휴직');
 
---
-INSERT INTO employee_status (code, employee_id, department_id, position_id, job_type_id, status, hire_date, end_date)
-VALUES
-(1001, 1, 1, 1, 1, '재직', '2010-01-15', NULL),
-(1002, 2, 2, 2, 1, '재직', '2012-07-01', NULL),
-(1003, 3, 3, 3, 3, '퇴사', '2015-03-20', '2020-08-30');
+
 
 --
 INSERT INTO job_history (employee_id, start_date, end_date, position_id, department_id, job_type_id, summary)
