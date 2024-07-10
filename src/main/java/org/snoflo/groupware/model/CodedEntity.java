@@ -6,7 +6,7 @@ import jakarta.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class CodedEntity extends BasedEntity {
     
-    @Column(name = "code")
+    @Column(name = "code", unique = true, nullable = false)
     private Integer code;
 
     public Integer getCode() {
