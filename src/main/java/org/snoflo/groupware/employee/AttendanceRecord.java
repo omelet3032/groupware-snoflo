@@ -1,28 +1,78 @@
 package org.snoflo.groupware.employee;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-
-import org.snoflo.groupware.model.BasedEntity;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
-@Entity
 @Table(name = "attendance_record")
-public class AttendanceRecord extends BasedEntity {
+public class AttendanceRecord {
     
-    @JoinColumn(name = "employee_id", nullable = false)
-    private Employee employee;
+    @Id
+    private Long id;
 
-    @Column(name = "clock_in")
+    private Long employeeId;
+
     private LocalDateTime clockIn;
 
-    @Column(name = "clock_out")
     private LocalDateTime clockOut;
 
-    @Column(name = "work_hours")
-    private LocalTime workHours;
+    private Duration workHours;
+
+    public void calculateWorkHours() {
+        if (clockIn != null && clockOut != null) {
+            this.workHours = Duration.between(clockIn, clockOut);
+        }
+    }
+
+    // workHours를 보기 좋게 표현하는 메서드
+    public String getFormattedWorkHours() {
+        if (workHours == null) return "00:00";
+        long hours = workHours.toHours();
+        long minutes = workHours.toMinutesPart();
+        return String.format("%02d:%02d", hours, minutes);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public LocalDateTime getClockIn() {
+        return clockIn;
+    }
+
+    public void setClockIn(LocalDateTime clockIn) {
+        this.clockIn = clockIn;
+    }
+
+    public LocalDateTime getClockOut() {
+        return clockOut;
+    }
+
+    public void setClockOut(LocalDateTime clockOut) {
+        this.clockOut = clockOut;
+    }
+
+    public Duration getWorkHours() {
+        return workHours;
+    }
+
+    public void setWorkHours(Duration workHours) {
+        this.workHours = workHours;
+    }
+
+    
 }
+

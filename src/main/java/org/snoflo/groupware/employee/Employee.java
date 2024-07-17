@@ -1,63 +1,63 @@
 package org.snoflo.groupware.employee;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.snoflo.groupware.model.NamedEntity;
-import org.snoflo.groupware.model.PersonEntity;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Pattern;
 
-@Entity
-@Table(name = "Employee")
-public class Employee extends PersonEntity {
+@Table(name = "employees")
+public class Employee {
 
-    @Column(name = "phone", nullable = false, length = 20)
+    @Id
+    private Long id;
+    
+    private int code;
+
+    private String name;
+
     private String phone;
 
-    @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
-    @Column(name = "photo")
     private String photo;
 
-    @ManyToOne
-    @JoinColumn(name = "department_id", nullable = false)
-    private Department department;
+    private Long departmentId;
 
-    @ManyToOne
-    @JoinColumn(name = "position_id", nullable = false)
-    private Position position;
+    private Long positionId;
 
-    @ManyToOne
-    @JoinColumn(name = "job_type_id", nullable = false)
-    private JobType jobType;
+    private Long jobTypeId;
 
-    @Column(name = "status", nullable = false, length = 20)
-    @Pattern(regexp = "재직|퇴사|휴직", message = "사원 상태값은 재직, 퇴사, 휴직중 하나여야 합니다.")
     private String status;
 
-    @Column(name = "hire_date", nullable = false)
     private LocalDate hireDate;
 
-    @Column(name = "end_date")
     private LocalDate endDate;
 
-    @OneToMany(mappedBy = "employee")
-    private List<JobHistory> jobHistorys = new ArrayList<>();
+    public Long getId() {
+        return id;
+    }
 
-    @OneToMany(mappedBy = "employee")
-    private List<AttendanceRecord> attendanceRecords = new ArrayList<>();
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public int getCode() {
+        return code;
+    }
 
-    private List<RemainingVacationDays> remainingVacationDays = new ArrayList<>();
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getPhone() {
         return phone;
@@ -83,28 +83,28 @@ public class Employee extends PersonEntity {
         this.photo = photo;
     }
 
-    public Department getDepartment() {
-        return department;
+    public Long getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
     }
 
-    public Position getPosition() {
-        return position;
+    public Long getPositionId() {
+        return positionId;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    public void setPositionId(Long positionId) {
+        this.positionId = positionId;
     }
 
-    public JobType getJobType() {
-        return jobType;
+    public Long getJobTypeId() {
+        return jobTypeId;
     }
 
-    public void setJobType(JobType jobType) {
-        this.jobType = jobType;
+    public void setJobTypeId(Long jobTypeId) {
+        this.jobTypeId = jobTypeId;
     }
 
     public String getStatus() {
@@ -130,6 +130,7 @@ public class Employee extends PersonEntity {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
+
 
 
 }

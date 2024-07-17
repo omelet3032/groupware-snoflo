@@ -2,54 +2,43 @@ package org.snoflo.groupware.employee;
 
 import java.time.LocalDate;
 
-import org.snoflo.groupware.model.BasedEntity;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-/* 
- * JobHistory의 책임, 역할
- * 사원의 직무이력..!
- */
-@Entity
 @Table(name = "job_history")
-public class JobHistory extends BasedEntity {
+public class JobHistory {
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
+    @Id
+    private Long id;
 
-    @Column(name = "start_date", nullable = false)
+    private Long employeeId;
+
     private LocalDate startDate;
 
-    @Column(name = "end_date")
     private LocalDate endDate;
 
-    @ManyToOne
-    @JoinColumn(name = "position_id", nullable = false)
-    private Position position;
-    
-    @ManyToOne
-    @JoinColumn(name = "position_id", nullable = false)
-    private Department department;
+    private Long positionId;
 
-    @ManyToOne
-    @JoinColumn(name = "job_type_id", nullable = false)
-    private JobType jobType;
+    private Long departmentId;
 
-    @Column(name = "summary", length = 50)
+    private Long jobTypeId;
+
     private String summary;
 
-    public Employee getEmployee() {
-        return employee;
+    public Long getId() {
+        return id;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
 
     public LocalDate getStartDate() {
@@ -68,28 +57,28 @@ public class JobHistory extends BasedEntity {
         this.endDate = endDate;
     }
 
-    public Position getPosition() {
-        return position;
+    public Long getPositionId() {
+        return positionId;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    public void setPositionId(Long positionId) {
+        this.positionId = positionId;
     }
 
-    public Department getDepartment() {
-        return department;
+    public Long getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
     }
 
-    public JobType getJobType() {
-        return jobType;
+    public Long getJobTypeId() {
+        return jobTypeId;
     }
 
-    public void setJobType(JobType jobType) {
-        this.jobType = jobType;
+    public void setJobTypeId(Long jobTypeId) {
+        this.jobTypeId = jobTypeId;
     }
 
     public String getSummary() {
