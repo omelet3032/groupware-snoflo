@@ -14,11 +14,11 @@ VALUES
 (303, '인턴');
 
 -- 
-INSERT INTO departments (code, name, manager_id)
+INSERT INTO departments (code, name)
 VALUES
-(101, 'HR', NULL),
-(102, '개발팀', NULL),
-(103, '재무팀', NULL);
+(101, 'HR'),
+(102, '개발팀',),
+(103, '재무팀');
 
 -- 
 INSERT INTO employees (code, name, phone, birth_date, department_id, position_id, job_type_id, status, hire_date, end_date)

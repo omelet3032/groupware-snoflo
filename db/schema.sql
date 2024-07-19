@@ -1,8 +1,9 @@
+USE snoflo;
 -- 부서정보 
 CREATE TABLE departments (
     id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     code INTEGER UNSIGNED NOT NULL UNIQUE,
-    name VARCHAR(20) NOT NULL,
+    name VARCHAR(20) NOT NULL
 ) ENGINE=InnoDB;
 
 -- 직급정보
@@ -35,7 +36,7 @@ CREATE TABLE employees (
     end_date DATE, 
     FOREIGN KEY (department_id) REFERENCES departments(id),
     FOREIGN KEY (position_id) REFERENCES positions(id),
-    FOREIGN KEY (job_type_id) REFERENCES job_types(id);
+    FOREIGN KEY (job_type_id) REFERENCES job_types(id)
 ) ENGINE=InnoDB;
 
 -- 부서장 정보 테이블
@@ -45,7 +46,7 @@ CREATE TABLE department_managers (
 	  UNIQUE (manager_id, department_id),
 	  FOREIGN KEY (manager_id) REFERENCES employees(id),
 	  FOREIGN KEY (department_id) REFERENCES departments(id)
-)
+) ENGINE=InnoDB;
 
 -- 계정정보
 CREATE TABLE accounts (
