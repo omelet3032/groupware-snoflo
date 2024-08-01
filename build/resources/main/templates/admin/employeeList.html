@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>직원 목록</title>
+</head>
+<body>
+    <h1>직원 목록</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>사번</th>
+                <th>이름</th>
+                <th>부서</th>
+                <th>직급</th>
+                <th>계약형태</th>
+                <th>관리자</th>
+                <th>재직여부</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.code}"></td>
+                <td th:text="${employee.name}"></td>
+                <td th:text="${employee.departmentName}"></td>
+                <td th:text="${employee.jobPositionName}"></td>
+                <td th:text="${employee.jobTypeName}"></d>
+                <td th:text="${employee.managerCode}"></d>
+                <td th:text="${employee.status}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
