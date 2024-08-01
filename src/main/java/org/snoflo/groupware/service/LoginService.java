@@ -19,14 +19,14 @@ public class LoginService {
     public LoginResult login(String email, String password) {
 
         AccountDto account = loginRepository.findByEmailAndPassword(email, password);
-
+        
         if (account == null) {
             return new LoginResult(false);
         }
-
+        
         boolean isAdmin = account.getRole().equals("관리자");
-
-        return isAdmin ? new LoginResult(true, "관리자") : new LoginResult(true, "사원");
+        
+        return isAdmin ? new LoginResult( true, "관리자") : new LoginResult( true, "사원");
     }
 
 }
