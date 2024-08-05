@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="https://via.placeholder.com/150x50?text=Snoflo+Logo" alt="Snoflo Logo">
+        </div>
+        <div class="user-info">
+            <div id="attendance-status">출근전</div>
+            <div><a id="attendance-action" href="javascript:void(0);" onclick="handleAttendance()">출근하기</a></div>
+            <div>김경민</div>
+            <div><a href="#">내 계정</a></div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="menu">
+            <ul>
+                <li><a href="#">홈</a></li>
+                <li><a href="#">내 정보</a></li>
+                <li><a href="#">출퇴근기록 수정</a></li>
+                <li><a href="#">휴가 신청</a></li>
+                <li><a href="#">휴직 신청</a></li>
+                <li>
+                    <a href="#">관리자 메뉴</a>
+                    <ul class="submenu">
+                        <li><a href="/employeeList">사원정보</a></li>
+                        <li><a href="#">계정정보</a></li>
+                        <li><a href="#">휴가정보</a></li>
+                        <li><a href="#">휴직정보</a></li>
+                        <li><a href="#">출퇴근기록</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="search-container">
+                <form action="/search" method="GET">
+                    <input type="text" name="name" placeholder="이름으로 검색...">
+                    <button type="submit">검색</button>
+                </form>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>사번</th>
+                        <th>이름</th>
+                        <th>부서</th>
+                        <th>직급</th>
+                        <th>계약형태</th>
+                        <th>관리자</th>
+                        <th>재직여부</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="employee : ${employees}">
+                        <td th:text="${employee.code}"></td>
+                        <td th:text="${employee.name}"></td>
+                        <td th:text="${employee.departmentName}"></td>
+                        <td th:text="${employee.jobPositionName}"></td>
+                        <td th:text="${employee.jobTypeName}">
+                            </d>
+                        <td th:text="${employee.managerCode}">
+                            </d>
+                        <td th:text="${employee.status}"></td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+    </div>
+</body>
+
+</html>

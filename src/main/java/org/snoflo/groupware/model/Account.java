@@ -1,7 +1,7 @@
 package org.snoflo.groupware.model;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 @Table(name = "account")
 public class Account {

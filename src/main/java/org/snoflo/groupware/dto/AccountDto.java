@@ -1,8 +1,6 @@
 package org.snoflo.groupware.dto;
 
 public class AccountDto {
-    
-    private Long id;
 
     private int employeeCode;
 
@@ -15,20 +13,12 @@ public class AccountDto {
     public AccountDto() {
     }
 
-    public AccountDto(Long id, int employeeCode, String email, String password, String role) {
-        this.id = id;
+    public AccountDto(int employeeCode, String email, String password, String role) {
+
         this.employeeCode = employeeCode;
         this.email = email;
         this.password = password;
         this.role = role;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public int getEmployeeCode() {
@@ -63,6 +53,4 @@ public class AccountDto {
         this.role = role;
     }
 
-    
 }
-

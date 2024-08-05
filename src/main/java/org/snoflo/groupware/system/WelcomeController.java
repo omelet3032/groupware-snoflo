@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class WelcomeController {
@@ -37,19 +36,13 @@ public class WelcomeController {
 
         boolean isAdmin = result.getRole().equals("관리자");
 
-        if (isAdmin) {
-            return "redirect:/admin/homeAdmin"; // 대시보드 페이지로 리다이렉트
-        } else {
-            return "redirect:/user/homeUser";
-        }
-
+        return isAdmin ? "redirect:/admin/homeAdmin" : "redirect:/user/homeUser";
     }
 
     @GetMapping("/admin/homeAdmin")
     public String homeAdmin() {
         return "admin/homeAdmin";
     }
-
 
     @GetMapping("/user/homeUser")
     public String homeUser() {
