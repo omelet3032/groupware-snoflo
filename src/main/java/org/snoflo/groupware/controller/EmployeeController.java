@@ -45,6 +45,11 @@ public class EmployeeController {
         model.addAttribute("accounts", accounts);
         return "admin/account";
     }
+   
+    @GetMapping("/registerEmployee")
+    public String addEmployee(EmployeeDto employeeDto) {
+        return "admin/registerEmployee";
+    }
     
 
 }
