@@ -28,7 +28,7 @@ CREATE TABLE employee (
     department_code INTEGER UNSIGNED NOT NULL,
     job_position_code INTEGER UNSIGNED NOT NULL,
     job_type_code INTEGER UNSIGNED NOT NULL,
-    manager_code INTEGER UNSIGNED NOT NULL DEFAULT 0,
+    -- manager_code INTEGER UNSIGNED NOT NULL DEFAULT 0,
     status VARCHAR(20) NOT NULL CHECK (status IN ('재직', '휴직', '퇴사')),
     FOREIGN KEY (department_code) REFERENCES department(code),
     FOREIGN KEY (job_position_code) REFERENCES job_position(code),
@@ -61,8 +61,8 @@ CREATE TABLE employment_history (
     employee_code INTEGER UNSIGNED NOT NULL,
     hire_date DATE NOT NULL,
     end_date DATE,
-    hire_summary VARCHAR(50) NOT NULL CHECK (summary IN ('신입', '경력')),
-    end_summary VARCHAR(50) CHECK (summary IN ('자진퇴사', '권고사직', '계약종료')),
+    hire_summary VARCHAR(50) NOT NULL CHECK (hire_summary IN ('신입', '경력')),
+    end_summary VARCHAR(50) CHECK (end_summary IN ('자진퇴사', '권고사직', '계약종료')),
     UNIQUE(employee_code, hire_date),
     FOREIGN KEY (employee_code) REFERENCES employee(code)
 ) ENGINE=InnoDB;
