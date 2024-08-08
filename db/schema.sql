@@ -122,6 +122,7 @@ CREATE TABLE attendance_record (
     clock_in DATETIME,
     clock_out DATETIME,
     work_hours TIME,
+    summary CHECK IN (summary IN ('기록 누락')),
     UNIQUE (employee_code, clock_in),
     FOREIGN KEY (employee_code) REFERENCES employee(code)
 ) ENGINE=InnoDB;
